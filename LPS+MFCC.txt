@@ -1,0 +1,624 @@
+ouc@ouc-X10SRA:~/test/multiObjectLearning$ CUDA_VISIBLE_DEVICES=1 python test.py 
+/home/ouc/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:34: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Using TensorFlow backend.
+(975150, 8, 257)
+(975150, 8, 41)
+
+
+(16680, 8, 257)
+(16680, 8, 41)
+
+
+(975150, 257)
+(975150, 257)
+(975150, 257)
+(975150, 41)
+(975150, 41)
+(975150, 40)
+
+
+(16680, 257)
+(16680, 257)
+(16680, 257)
+(16680, 41)
+(16680, 41)
+(16680, 40)
+
+
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+mixed_LPS (InputLayer)          (None, 8, 257)       0                                            
+__________________________________________________________________________________________________
+mixed_MFCC (InputLayer)         (None, 8, 41)        0                                            
+__________________________________________________________________________________________________
+concatenate_1 (Concatenate)     (None, 8, 298)       0           mixed_LPS[0][0]                  
+                                                                 mixed_MFCC[0][0]                 
+__________________________________________________________________________________________________
+flatten_1 (Flatten)             (None, 2384)         0           concatenate_1[0][0]              
+__________________________________________________________________________________________________
+dense_1 (Dense)                 (None, 2048)         4884480     flatten_1[0][0]                  
+__________________________________________________________________________________________________
+dropout_1 (Dropout)             (None, 2048)         0           dense_1[0][0]                    
+__________________________________________________________________________________________________
+dense_2 (Dense)                 (None, 2048)         4196352     dropout_1[0][0]                  
+__________________________________________________________________________________________________
+dropout_2 (Dropout)             (None, 2048)         0           dense_2[0][0]                    
+__________________________________________________________________________________________________
+speech_LPS (Dense)              (None, 257)          526593      dropout_2[0][0]                  
+__________________________________________________________________________________________________
+dynamic_noise_LPS (Dense)       (None, 257)          526593      dropout_2[0][0]                  
+__________________________________________________________________________________________________
+LPS_IRM (Dense)                 (None, 257)          526593      dropout_2[0][0]                  
+__________________________________________________________________________________________________
+speech_MFCC (Dense)             (None, 41)           84009       dropout_2[0][0]                  
+__________________________________________________________________________________________________
+dynamic_noise_MFCC (Dense)      (None, 41)           84009       dropout_2[0][0]                  
+__________________________________________________________________________________________________
+MFCC_IRM (Dense)                (None, 40)           81960       dropout_2[0][0]                  
+==================================================================================================
+Total params: 10,910,589
+Trainable params: 10,910,589
+Non-trainable params: 0
+__________________________________________________________________________________________________
+2018-12-26 15:12:29.155987: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2018-12-26 15:12:29.321275: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Found device 0 with properties: 
+name: GeForce GTX 1080 Ti major: 6 minor: 1 memoryClockRate(GHz): 1.582
+pciBusID: 0000:04:00.0
+totalMemory: 10.91GiB freeMemory: 10.75GiB
+2018-12-26 15:12:29.321306: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1120] Creating TensorFlow device (/device:GPU:0) -> (device: 0, name: GeForce GTX 1080 Ti, pci bus id: 0000:04:00.0, compute capability: 6.1)
+16680/16680 [==============================] - 1s 87us/step
+Iteration: 0  loss:  [30.127989819753083, 6.377775729931802, 5.286777537046291, 0.44304707865063236, 8.79326266556335, 8.726020589778177, 0.5011064043433832]
+Epoch 1/10
+975150/975150 [==============================] - 52s 53us/step - loss: 12.1207 - speech_LPS_loss: 1.1213 - dynamic_noise_LPS_loss: 1.0696 - LPS_IRM_loss: 0.1742 - speech_MFCC_loss: 5.5412 - dynamic_noise_MFCC_loss: 4.0557 - MFCC_IRM_loss: 0.1587
+Epoch 2/10
+975150/975150 [==============================] - 52s 53us/step - loss: 10.2015 - speech_LPS_loss: 0.8517 - dynamic_noise_LPS_loss: 0.7669 - LPS_IRM_loss: 0.1342 - speech_MFCC_loss: 4.9582 - dynamic_noise_MFCC_loss: 3.3745 - MFCC_IRM_loss: 0.1160
+Epoch 3/10
+975150/975150 [==============================] - 52s 53us/step - loss: 9.7392 - speech_LPS_loss: 0.8141 - dynamic_noise_LPS_loss: 0.7300 - LPS_IRM_loss: 0.1270 - speech_MFCC_loss: 4.7706 - dynamic_noise_MFCC_loss: 3.1928 - MFCC_IRM_loss: 0.1047
+Epoch 4/10
+975150/975150 [==============================] - 51s 53us/step - loss: 9.4829 - speech_LPS_loss: 0.7968 - dynamic_noise_LPS_loss: 0.7133 - LPS_IRM_loss: 0.1238 - speech_MFCC_loss: 4.6571 - dynamic_noise_MFCC_loss: 3.0925 - MFCC_IRM_loss: 0.0994
+Epoch 5/10
+975150/975150 [==============================] - 51s 53us/step - loss: 9.3066 - speech_LPS_loss: 0.7851 - dynamic_noise_LPS_loss: 0.7015 - LPS_IRM_loss: 0.1219 - speech_MFCC_loss: 4.5760 - dynamic_noise_MFCC_loss: 3.0260 - MFCC_IRM_loss: 0.0961
+Epoch 6/10
+975150/975150 [==============================] - 51s 53us/step - loss: 9.1722 - speech_LPS_loss: 0.7756 - dynamic_noise_LPS_loss: 0.6932 - LPS_IRM_loss: 0.1204 - speech_MFCC_loss: 4.5110 - dynamic_noise_MFCC_loss: 2.9782 - MFCC_IRM_loss: 0.0938
+Epoch 7/10
+975150/975150 [==============================] - 52s 53us/step - loss: 9.0637 - speech_LPS_loss: 0.7675 - dynamic_noise_LPS_loss: 0.6864 - LPS_IRM_loss: 0.1193 - speech_MFCC_loss: 4.4589 - dynamic_noise_MFCC_loss: 2.9397 - MFCC_IRM_loss: 0.0919
+Epoch 8/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.9762 - speech_LPS_loss: 0.7615 - dynamic_noise_LPS_loss: 0.6812 - LPS_IRM_loss: 0.1184 - speech_MFCC_loss: 4.4151 - dynamic_noise_MFCC_loss: 2.9096 - MFCC_IRM_loss: 0.0905
+Epoch 9/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.9011 - speech_LPS_loss: 0.7556 - dynamic_noise_LPS_loss: 0.6755 - LPS_IRM_loss: 0.1176 - speech_MFCC_loss: 4.3775 - dynamic_noise_MFCC_loss: 2.8856 - MFCC_IRM_loss: 0.0892
+Epoch 10/10
+975150/975150 [==============================] - 51s 53us/step - loss: 8.8351 - speech_LPS_loss: 0.7505 - dynamic_noise_LPS_loss: 0.6713 - LPS_IRM_loss: 0.1170 - speech_MFCC_loss: 4.3438 - dynamic_noise_MFCC_loss: 2.8643 - MFCC_IRM_loss: 0.0882
+16680/16680 [==============================] - 0s 15us/step
+Iteration: 10  loss:  [11.403090544227215, 1.0775912203091225, 0.7438710148100087, 0.15641272395348949, 5.266577372105002, 4.00032545428196, 0.15831280718747376]
+Epoch 1/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.7766 - speech_LPS_loss: 0.7464 - dynamic_noise_LPS_loss: 0.6670 - LPS_IRM_loss: 0.1164 - speech_MFCC_loss: 4.3142 - dynamic_noise_MFCC_loss: 2.8455 - MFCC_IRM_loss: 0.0872
+Epoch 2/10
+975150/975150 [==============================] - 51s 53us/step - loss: 8.7235 - speech_LPS_loss: 0.7415 - dynamic_noise_LPS_loss: 0.6637 - LPS_IRM_loss: 0.1159 - speech_MFCC_loss: 4.2869 - dynamic_noise_MFCC_loss: 2.8291 - MFCC_IRM_loss: 0.0865
+Epoch 3/10
+975150/975150 [==============================] - 51s 53us/step - loss: 8.6780 - speech_LPS_loss: 0.7384 - dynamic_noise_LPS_loss: 0.6605 - LPS_IRM_loss: 0.1154 - speech_MFCC_loss: 4.2627 - dynamic_noise_MFCC_loss: 2.8153 - MFCC_IRM_loss: 0.0857
+Epoch 4/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.6347 - speech_LPS_loss: 0.7343 - dynamic_noise_LPS_loss: 0.6579 - LPS_IRM_loss: 0.1150 - speech_MFCC_loss: 4.2404 - dynamic_noise_MFCC_loss: 2.8020 - MFCC_IRM_loss: 0.0850
+Epoch 5/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.5940 - speech_LPS_loss: 0.7314 - dynamic_noise_LPS_loss: 0.6547 - LPS_IRM_loss: 0.1147 - speech_MFCC_loss: 4.2190 - dynamic_noise_MFCC_loss: 2.7898 - MFCC_IRM_loss: 0.0844
+Epoch 6/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.5580 - speech_LPS_loss: 0.7280 - dynamic_noise_LPS_loss: 0.6522 - LPS_IRM_loss: 0.1143 - speech_MFCC_loss: 4.2004 - dynamic_noise_MFCC_loss: 2.7792 - MFCC_IRM_loss: 0.0839
+Epoch 7/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.5236 - speech_LPS_loss: 0.7252 - dynamic_noise_LPS_loss: 0.6497 - LPS_IRM_loss: 0.1140 - speech_MFCC_loss: 4.1820 - dynamic_noise_MFCC_loss: 2.7694 - MFCC_IRM_loss: 0.0834
+Epoch 8/10
+975150/975150 [==============================] - 52s 54us/step - loss: 8.4922 - speech_LPS_loss: 0.7223 - dynamic_noise_LPS_loss: 0.6475 - LPS_IRM_loss: 0.1137 - speech_MFCC_loss: 4.1646 - dynamic_noise_MFCC_loss: 2.7613 - MFCC_IRM_loss: 0.0829
+Epoch 9/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.4653 - speech_LPS_loss: 0.7201 - dynamic_noise_LPS_loss: 0.6458 - LPS_IRM_loss: 0.1135 - speech_MFCC_loss: 4.1497 - dynamic_noise_MFCC_loss: 2.7537 - MFCC_IRM_loss: 0.0826
+Epoch 10/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.4356 - speech_LPS_loss: 0.7175 - dynamic_noise_LPS_loss: 0.6439 - LPS_IRM_loss: 0.1132 - speech_MFCC_loss: 4.1332 - dynamic_noise_MFCC_loss: 2.7457 - MFCC_IRM_loss: 0.0821
+16680/16680 [==============================] - 0s 17us/step
+Iteration: 20  loss:  [11.313888818754567, 1.0378030076873102, 0.745557190817323, 0.15648930310774192, 5.141746107737223, 4.069335018587913, 0.16295822265622714]
+Epoch 1/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.4094 - speech_LPS_loss: 0.7157 - dynamic_noise_LPS_loss: 0.6414 - LPS_IRM_loss: 0.1130 - speech_MFCC_loss: 4.1198 - dynamic_noise_MFCC_loss: 2.7378 - MFCC_IRM_loss: 0.0818
+Epoch 2/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.3843 - speech_LPS_loss: 0.7130 - dynamic_noise_LPS_loss: 0.6395 - LPS_IRM_loss: 0.1128 - speech_MFCC_loss: 4.1067 - dynamic_noise_MFCC_loss: 2.7308 - MFCC_IRM_loss: 0.0814
+Epoch 3/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.3589 - speech_LPS_loss: 0.7109 - dynamic_noise_LPS_loss: 0.6376 - LPS_IRM_loss: 0.1126 - speech_MFCC_loss: 4.0925 - dynamic_noise_MFCC_loss: 2.7244 - MFCC_IRM_loss: 0.0810
+Epoch 4/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.3384 - speech_LPS_loss: 0.7091 - dynamic_noise_LPS_loss: 0.6365 - LPS_IRM_loss: 0.1124 - speech_MFCC_loss: 4.0814 - dynamic_noise_MFCC_loss: 2.7182 - MFCC_IRM_loss: 0.0808
+Epoch 5/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.3185 - speech_LPS_loss: 0.7075 - dynamic_noise_LPS_loss: 0.6349 - LPS_IRM_loss: 0.1122 - speech_MFCC_loss: 4.0696 - dynamic_noise_MFCC_loss: 2.7139 - MFCC_IRM_loss: 0.0805
+Epoch 6/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.2974 - speech_LPS_loss: 0.7055 - dynamic_noise_LPS_loss: 0.6336 - LPS_IRM_loss: 0.1120 - speech_MFCC_loss: 4.0581 - dynamic_noise_MFCC_loss: 2.7080 - MFCC_IRM_loss: 0.0802
+Epoch 7/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.2760 - speech_LPS_loss: 0.7036 - dynamic_noise_LPS_loss: 0.6313 - LPS_IRM_loss: 0.1118 - speech_MFCC_loss: 4.0476 - dynamic_noise_MFCC_loss: 2.7017 - MFCC_IRM_loss: 0.0799
+Epoch 8/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.2590 - speech_LPS_loss: 0.7023 - dynamic_noise_LPS_loss: 0.6307 - LPS_IRM_loss: 0.1117 - speech_MFCC_loss: 4.0368 - dynamic_noise_MFCC_loss: 2.6978 - MFCC_IRM_loss: 0.0796
+Epoch 9/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.2403 - speech_LPS_loss: 0.7007 - dynamic_noise_LPS_loss: 0.6295 - LPS_IRM_loss: 0.1116 - speech_MFCC_loss: 4.0262 - dynamic_noise_MFCC_loss: 2.6929 - MFCC_IRM_loss: 0.0794
+Epoch 10/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.2236 - speech_LPS_loss: 0.6993 - dynamic_noise_LPS_loss: 0.6285 - LPS_IRM_loss: 0.1114 - speech_MFCC_loss: 4.0170 - dynamic_noise_MFCC_loss: 2.6884 - MFCC_IRM_loss: 0.0791
+16680/16680 [==============================] - 0s 16us/step
+Iteration: 30  loss:  [11.20852932049502, 1.0380804487841306, 0.7496252080233549, 0.1521988766799442, 5.061718203180986, 4.051591429493124, 0.15531529432578053]
+Epoch 1/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.2090 - speech_LPS_loss: 0.6979 - dynamic_noise_LPS_loss: 0.6273 - LPS_IRM_loss: 0.1113 - speech_MFCC_loss: 4.0082 - dynamic_noise_MFCC_loss: 2.6854 - MFCC_IRM_loss: 0.0789
+Epoch 2/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.1916 - speech_LPS_loss: 0.6965 - dynamic_noise_LPS_loss: 0.6260 - LPS_IRM_loss: 0.1112 - speech_MFCC_loss: 3.9992 - dynamic_noise_MFCC_loss: 2.6800 - MFCC_IRM_loss: 0.0787
+Epoch 3/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.1764 - speech_LPS_loss: 0.6950 - dynamic_noise_LPS_loss: 0.6251 - LPS_IRM_loss: 0.1110 - speech_MFCC_loss: 3.9908 - dynamic_noise_MFCC_loss: 2.6760 - MFCC_IRM_loss: 0.0785
+Epoch 4/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.1602 - speech_LPS_loss: 0.6938 - dynamic_noise_LPS_loss: 0.6236 - LPS_IRM_loss: 0.1109 - speech_MFCC_loss: 3.9816 - dynamic_noise_MFCC_loss: 2.6720 - MFCC_IRM_loss: 0.0783
+Epoch 5/10
+975150/975150 [==============================] - 52s 54us/step - loss: 8.1480 - speech_LPS_loss: 0.6930 - dynamic_noise_LPS_loss: 0.6229 - LPS_IRM_loss: 0.1108 - speech_MFCC_loss: 3.9744 - dynamic_noise_MFCC_loss: 2.6688 - MFCC_IRM_loss: 0.0781
+Epoch 6/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.1337 - speech_LPS_loss: 0.6917 - dynamic_noise_LPS_loss: 0.6225 - LPS_IRM_loss: 0.1107 - speech_MFCC_loss: 3.9653 - dynamic_noise_MFCC_loss: 2.6656 - MFCC_IRM_loss: 0.0779
+Epoch 7/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.1189 - speech_LPS_loss: 0.6908 - dynamic_noise_LPS_loss: 0.6211 - LPS_IRM_loss: 0.1106 - speech_MFCC_loss: 3.9575 - dynamic_noise_MFCC_loss: 2.6613 - MFCC_IRM_loss: 0.0778
+Epoch 8/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.1082 - speech_LPS_loss: 0.6896 - dynamic_noise_LPS_loss: 0.6204 - LPS_IRM_loss: 0.1105 - speech_MFCC_loss: 3.9513 - dynamic_noise_MFCC_loss: 2.6587 - MFCC_IRM_loss: 0.0776
+Epoch 9/10
+975150/975150 [==============================] - 52s 54us/step - loss: 8.0949 - speech_LPS_loss: 0.6890 - dynamic_noise_LPS_loss: 0.6196 - LPS_IRM_loss: 0.1104 - speech_MFCC_loss: 3.9431 - dynamic_noise_MFCC_loss: 2.6555 - MFCC_IRM_loss: 0.0774
+Epoch 10/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.0821 - speech_LPS_loss: 0.6878 - dynamic_noise_LPS_loss: 0.6192 - LPS_IRM_loss: 0.1103 - speech_MFCC_loss: 3.9358 - dynamic_noise_MFCC_loss: 2.6518 - MFCC_IRM_loss: 0.0773
+16680/16680 [==============================] - 0s 16us/step
+Iteration: 40  loss:  [11.125638297193056, 1.0049099059127788, 0.7383753209662952, 0.1531474980304567, 4.986663693947186, 4.084820670303967, 0.1577212142000953]
+Epoch 1/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.0715 - speech_LPS_loss: 0.6869 - dynamic_noise_LPS_loss: 0.6180 - LPS_IRM_loss: 0.1102 - speech_MFCC_loss: 3.9302 - dynamic_noise_MFCC_loss: 2.6491 - MFCC_IRM_loss: 0.0771
+Epoch 2/10
+975150/975150 [==============================] - 52s 54us/step - loss: 8.0594 - speech_LPS_loss: 0.6861 - dynamic_noise_LPS_loss: 0.6174 - LPS_IRM_loss: 0.1101 - speech_MFCC_loss: 3.9227 - dynamic_noise_MFCC_loss: 2.6461 - MFCC_IRM_loss: 0.0770
+Epoch 3/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.0485 - speech_LPS_loss: 0.6849 - dynamic_noise_LPS_loss: 0.6163 - LPS_IRM_loss: 0.1100 - speech_MFCC_loss: 3.9168 - dynamic_noise_MFCC_loss: 2.6435 - MFCC_IRM_loss: 0.0768
+Epoch 4/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.0374 - speech_LPS_loss: 0.6844 - dynamic_noise_LPS_loss: 0.6159 - LPS_IRM_loss: 0.1100 - speech_MFCC_loss: 3.9104 - dynamic_noise_MFCC_loss: 2.6401 - MFCC_IRM_loss: 0.0767
+Epoch 5/10
+975150/975150 [==============================] - 52s 53us/step - loss: 8.0281 - speech_LPS_loss: 0.6835 - dynamic_noise_LPS_loss: 0.6155 - LPS_IRM_loss: 0.1099 - speech_MFCC_loss: 3.9044 - dynamic_noise_MFCC_loss: 2.6383 - MFCC_IRM_loss: 0.0765
+Epoch 6/10
+975150/975150 [==============================] - 52s 54us/step - loss: 8.0146 - speech_LPS_loss: 0.6826 - dynamic_noise_LPS_loss: 0.6143 - LPS_IRM_loss: 0.1098 - speech_MFCC_loss: 3.8973 - dynamic_noise_MFCC_loss: 2.6342 - MFCC_IRM_loss: 0.0764
+Epoch 7/10
+975150/975150 [==============================] - 52s 54us/step - loss: 8.0071 - speech_LPS_loss: 0.6818 - dynamic_noise_LPS_loss: 0.6136 - LPS_IRM_loss: 0.1097 - speech_MFCC_loss: 3.8928 - dynamic_noise_MFCC_loss: 2.6329 - MFCC_IRM_loss: 0.0763
+Epoch 8/10
+975150/975150 [==============================] - 52s 53us/step - loss: 7.9976 - speech_LPS_loss: 0.6814 - dynamic_noise_LPS_loss: 0.6127 - LPS_IRM_loss: 0.1097 - speech_MFCC_loss: 3.8870 - dynamic_noise_MFCC_loss: 2.6307 - MFCC_IRM_loss: 0.0762
+Epoch 9/10
+975150/975150 [==============================] - 52s 53us/step - loss: 7.9873 - speech_LPS_loss: 0.6803 - dynamic_noise_LPS_loss: 0.6125 - LPS_IRM_loss: 0.1096 - speech_MFCC_loss: 3.8816 - dynamic_noise_MFCC_loss: 2.6272 - MFCC_IRM_loss: 0.0760
+Epoch 10/10
+975150/975150 [==============================] - 52s 54us/step - loss: 7.9795 - speech_LPS_loss: 0.6796 - dynamic_noise_LPS_loss: 0.6125 - LPS_IRM_loss: 0.1095 - speech_MFCC_loss: 3.8762 - dynamic_noise_MFCC_loss: 2.6258 - MFCC_IRM_loss: 0.0759
+16680/16680 [==============================] - 0s 16us/step
+Iteration: 50  loss:  [11.160818063383765, 0.9903360564074071, 0.7297307195423318, 0.1542134435485593, 4.988267380327915, 4.1392680710168195, 0.15900238500081665]
+Epoch 1/10
+975150/975150 [==============================] - 52s 53us/step - loss: 7.9703 - speech_LPS_loss: 0.6790 - dynamic_noise_LPS_loss: 0.6114 - LPS_IRM_loss: 0.1094 - speech_MFCC_loss: 3.8706 - dynamic_noise_MFCC_loss: 2.6240 - MFCC_IRM_loss: 0.0758
+Epoch 2/10
+975150/975150 [==============================] - 52s 54us/step - loss: 7.9625 - speech_LPS_loss: 0.6782 - dynamic_noise_LPS_loss: 0.6112 - LPS_IRM_loss: 0.1094 - speech_MFCC_loss: 3.8661 - dynamic_noise_MFCC_loss: 2.6218 - MFCC_IRM_loss: 0.0757
+Epoch 3/10
+975150/975150 [==============================] - 52s 54us/step - loss: 7.9531 - speech_LPS_loss: 0.6777 - dynamic_noise_LPS_loss: 0.6102 - LPS_IRM_loss: 0.1093 - speech_MFCC_loss: 3.8615 - dynamic_noise_MFCC_loss: 2.6187 - MFCC_IRM_loss: 0.0756
+Epoch 4/10
+975150/975150 [==============================] - 52s 54us/step - loss: 7.9436 - speech_LPS_loss: 0.6769 - dynamic_noise_LPS_loss: 0.6102 - LPS_IRM_loss: 0.1092 - speech_MFCC_loss: 3.8547 - dynamic_noise_MFCC_loss: 2.6172 - MFCC_IRM_loss: 0.0755
+Epoch 5/10
+975150/975150 [==============================] - 52s 53us/step - loss: 7.9362 - speech_LPS_loss: 0.6762 - dynamic_noise_LPS_loss: 0.6094 - LPS_IRM_loss: 0.1092 - speech_MFCC_loss: 3.8509 - dynamic_noise_MFCC_loss: 2.6151 - MFCC_IRM_loss: 0.0754
+Epoch 6/10
+975150/975150 [==============================] - 52s 53us/step - loss: 7.9302 - speech_LPS_loss: 0.6755 - dynamic_noise_LPS_loss: 0.6091 - LPS_IRM_loss: 0.1091 - speech_MFCC_loss: 3.8473 - dynamic_noise_MFCC_loss: 2.6138 - MFCC_IRM_loss: 0.0753
+Epoch 7/10
+975150/975150 [==============================] - 52s 53us/step - loss: 7.9200 - speech_LPS_loss: 0.6748 - dynamic_noise_LPS_loss: 0.6084 - LPS_IRM_loss: 0.1091 - speech_MFCC_loss: 3.8411 - dynamic_noise_MFCC_loss: 2.6114 - MFCC_IRM_loss: 0.0752
+Epoch 8/10
+975150/975150 [==============================] - 52s 53us/step - loss: 7.9141 - speech_LPS_loss: 0.6742 - dynamic_noise_LPS_loss: 0.6081 - LPS_IRM_loss: 0.1090 - speech_MFCC_loss: 3.8375 - dynamic_noise_MFCC_loss: 2.6101 - MFCC_IRM_loss: 0.0751
+Epoch 9/10
+975150/975150 [==============================] - 52s 53us/step - loss: 7.9054 - speech_LPS_loss: 0.6737 - dynamic_noise_LPS_loss: 0.6076 - LPS_IRM_loss: 0.1089 - speech_MFCC_loss: 3.8328 - dynamic_noise_MFCC_loss: 2.6074 - MFCC_IRM_loss: 0.0750
+Epoch 10/10
+975150/975150 [==============================] - 52s 53us/step - loss: 7.8981 - speech_LPS_loss: 0.6732 - dynamic_noise_LPS_loss: 0.6071 - LPS_IRM_loss: 0.1089 - speech_MFCC_loss: 3.8284 - dynamic_noise_MFCC_loss: 2.6056 - MFCC_IRM_loss: 0.0749
+16680/16680 [==============================] - 0s 17us/step
+Iteration: 60  loss:  [11.043349423397073, 0.968671279302318, 0.7442378067570052, 0.14993336871087695, 4.895488775834191, 4.133770543608448, 0.1512476747842144]
+Epoch 1/10
+975150/975150 [==============================] - 52s 53us/step - loss: 7.8908 - speech_LPS_loss: 0.6725 - dynamic_noise_LPS_loss: 0.6068 - LPS_IRM_loss: 0.1089 - speech_MFCC_loss: 3.8241 - dynamic_noise_MFCC_loss: 2.6036 - MFCC_IRM_loss: 0.0748
+Epoch 2/10
+975150/975150 [==============================] - 51s 53us/step - loss: 7.8860 - speech_LPS_loss: 0.6719 - dynamic_noise_LPS_loss: 0.6066 - LPS_IRM_loss: 0.1088 - speech_MFCC_loss: 3.8206 - dynamic_noise_MFCC_loss: 2.6034 - MFCC_IRM_loss: 0.0747
+Epoch 3/10
+975150/975150 [==============================] - 51s 52us/step - loss: 7.8734 - speech_LPS_loss: 0.6712 - dynamic_noise_LPS_loss: 0.6056 - LPS_IRM_loss: 0.1087 - speech_MFCC_loss: 3.8145 - dynamic_noise_MFCC_loss: 2.5987 - MFCC_IRM_loss: 0.0746
+Epoch 4/10
+975150/975150 [==============================] - 51s 52us/step - loss: 7.8711 - speech_LPS_loss: 0.6708 - dynamic_noise_LPS_loss: 0.6060 - LPS_IRM_loss: 0.1087 - speech_MFCC_loss: 3.8116 - dynamic_noise_MFCC_loss: 2.5995 - MFCC_IRM_loss: 0.0745
+Epoch 5/10
+975150/975150 [==============================] - 49s 50us/step - loss: 7.8635 - speech_LPS_loss: 0.6705 - dynamic_noise_LPS_loss: 0.6052 - LPS_IRM_loss: 0.1086 - speech_MFCC_loss: 3.8081 - dynamic_noise_MFCC_loss: 2.5965 - MFCC_IRM_loss: 0.0745
+Epoch 6/10
+975150/975150 [==============================] - 49s 50us/step - loss: 7.8570 - speech_LPS_loss: 0.6697 - dynamic_noise_LPS_loss: 0.6048 - LPS_IRM_loss: 0.1086 - speech_MFCC_loss: 3.8037 - dynamic_noise_MFCC_loss: 2.5959 - MFCC_IRM_loss: 0.0744
+Epoch 7/10
+975150/975150 [==============================] - 48s 50us/step - loss: 7.8506 - speech_LPS_loss: 0.6693 - dynamic_noise_LPS_loss: 0.6044 - LPS_IRM_loss: 0.1086 - speech_MFCC_loss: 3.7997 - dynamic_noise_MFCC_loss: 2.5943 - MFCC_IRM_loss: 0.0744
+Epoch 8/10
+975150/975150 [==============================] - 49s 50us/step - loss: 7.8433 - speech_LPS_loss: 0.6685 - dynamic_noise_LPS_loss: 0.6040 - LPS_IRM_loss: 0.1085 - speech_MFCC_loss: 3.7958 - dynamic_noise_MFCC_loss: 2.5923 - MFCC_IRM_loss: 0.0742
+Epoch 9/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.8382 - speech_LPS_loss: 0.6683 - dynamic_noise_LPS_loss: 0.6039 - LPS_IRM_loss: 0.1085 - speech_MFCC_loss: 3.7922 - dynamic_noise_MFCC_loss: 2.5912 - MFCC_IRM_loss: 0.0741
+Epoch 10/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.8316 - speech_LPS_loss: 0.6679 - dynamic_noise_LPS_loss: 0.6033 - LPS_IRM_loss: 0.1084 - speech_MFCC_loss: 3.7886 - dynamic_noise_MFCC_loss: 2.5892 - MFCC_IRM_loss: 0.0741
+16680/16680 [==============================] - 0s 16us/step
+Iteration: 70  loss:  [11.002942534888104, 0.9577838822806196, 0.7399144090908608, 0.15071902116425603, 4.869252090888629, 4.131208502588798, 0.15406466949757913]
+Epoch 1/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.8245 - speech_LPS_loss: 0.6673 - dynamic_noise_LPS_loss: 0.6026 - LPS_IRM_loss: 0.1084 - speech_MFCC_loss: 3.7848 - dynamic_noise_MFCC_loss: 2.5875 - MFCC_IRM_loss: 0.0740
+Epoch 2/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.8198 - speech_LPS_loss: 0.6669 - dynamic_noise_LPS_loss: 0.6024 - LPS_IRM_loss: 0.1083 - speech_MFCC_loss: 3.7820 - dynamic_noise_MFCC_loss: 2.5862 - MFCC_IRM_loss: 0.0740
+Epoch 3/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.8136 - speech_LPS_loss: 0.6664 - dynamic_noise_LPS_loss: 0.6022 - LPS_IRM_loss: 0.1083 - speech_MFCC_loss: 3.7780 - dynamic_noise_MFCC_loss: 2.5848 - MFCC_IRM_loss: 0.0739
+Epoch 4/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.8070 - speech_LPS_loss: 0.6657 - dynamic_noise_LPS_loss: 0.6020 - LPS_IRM_loss: 0.1082 - speech_MFCC_loss: 3.7753 - dynamic_noise_MFCC_loss: 2.5820 - MFCC_IRM_loss: 0.0738
+Epoch 5/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.8025 - speech_LPS_loss: 0.6655 - dynamic_noise_LPS_loss: 0.6019 - LPS_IRM_loss: 0.1082 - speech_MFCC_loss: 3.7716 - dynamic_noise_MFCC_loss: 2.5815 - MFCC_IRM_loss: 0.0738
+Epoch 6/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.7979 - speech_LPS_loss: 0.6652 - dynamic_noise_LPS_loss: 0.6016 - LPS_IRM_loss: 0.1082 - speech_MFCC_loss: 3.7684 - dynamic_noise_MFCC_loss: 2.5807 - MFCC_IRM_loss: 0.0737
+Epoch 7/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.7922 - speech_LPS_loss: 0.6646 - dynamic_noise_LPS_loss: 0.6009 - LPS_IRM_loss: 0.1082 - speech_MFCC_loss: 3.7652 - dynamic_noise_MFCC_loss: 2.5796 - MFCC_IRM_loss: 0.0737
+Epoch 8/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.7874 - speech_LPS_loss: 0.6641 - dynamic_noise_LPS_loss: 0.6015 - LPS_IRM_loss: 0.1081 - speech_MFCC_loss: 3.7620 - dynamic_noise_MFCC_loss: 2.5782 - MFCC_IRM_loss: 0.0736
+Epoch 9/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.7803 - speech_LPS_loss: 0.6638 - dynamic_noise_LPS_loss: 0.6000 - LPS_IRM_loss: 0.1081 - speech_MFCC_loss: 3.7588 - dynamic_noise_MFCC_loss: 2.5763 - MFCC_IRM_loss: 0.0735
+Epoch 10/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.7766 - speech_LPS_loss: 0.6635 - dynamic_noise_LPS_loss: 0.6003 - LPS_IRM_loss: 0.1080 - speech_MFCC_loss: 3.7560 - dynamic_noise_MFCC_loss: 2.5753 - MFCC_IRM_loss: 0.0735
+16680/16680 [==============================] - 0s 15us/step
+Iteration: 80  loss:  [11.04637555046905, 0.9723485969525161, 0.7390814919265912, 0.1537759126733533, 4.872998190612244, 4.149969648228561, 0.15820158480597343]
+Epoch 1/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.7713 - speech_LPS_loss: 0.6629 - dynamic_noise_LPS_loss: 0.5997 - LPS_IRM_loss: 0.1080 - speech_MFCC_loss: 3.7523 - dynamic_noise_MFCC_loss: 2.5750 - MFCC_IRM_loss: 0.0734
+Epoch 2/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.7665 - speech_LPS_loss: 0.6626 - dynamic_noise_LPS_loss: 0.5995 - LPS_IRM_loss: 0.1080 - speech_MFCC_loss: 3.7497 - dynamic_noise_MFCC_loss: 2.5734 - MFCC_IRM_loss: 0.0733
+Epoch 3/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.7607 - speech_LPS_loss: 0.6621 - dynamic_noise_LPS_loss: 0.5991 - LPS_IRM_loss: 0.1079 - speech_MFCC_loss: 3.7460 - dynamic_noise_MFCC_loss: 2.5724 - MFCC_IRM_loss: 0.0732
+Epoch 4/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.7551 - speech_LPS_loss: 0.6618 - dynamic_noise_LPS_loss: 0.5986 - LPS_IRM_loss: 0.1079 - speech_MFCC_loss: 3.7433 - dynamic_noise_MFCC_loss: 2.5704 - MFCC_IRM_loss: 0.0732
+Epoch 5/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.7526 - speech_LPS_loss: 0.6615 - dynamic_noise_LPS_loss: 0.5986 - LPS_IRM_loss: 0.1078 - speech_MFCC_loss: 3.7412 - dynamic_noise_MFCC_loss: 2.5702 - MFCC_IRM_loss: 0.0732
+Epoch 6/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.7460 - speech_LPS_loss: 0.6613 - dynamic_noise_LPS_loss: 0.5986 - LPS_IRM_loss: 0.1078 - speech_MFCC_loss: 3.7362 - dynamic_noise_MFCC_loss: 2.5690 - MFCC_IRM_loss: 0.0731
+Epoch 7/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.7421 - speech_LPS_loss: 0.6608 - dynamic_noise_LPS_loss: 0.5983 - LPS_IRM_loss: 0.1078 - speech_MFCC_loss: 3.7349 - dynamic_noise_MFCC_loss: 2.5673 - MFCC_IRM_loss: 0.0730
+Epoch 8/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.7379 - speech_LPS_loss: 0.6603 - dynamic_noise_LPS_loss: 0.5981 - LPS_IRM_loss: 0.1077 - speech_MFCC_loss: 3.7320 - dynamic_noise_MFCC_loss: 2.5668 - MFCC_IRM_loss: 0.0730
+Epoch 9/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.7328 - speech_LPS_loss: 0.6601 - dynamic_noise_LPS_loss: 0.5975 - LPS_IRM_loss: 0.1077 - speech_MFCC_loss: 3.7290 - dynamic_noise_MFCC_loss: 2.5655 - MFCC_IRM_loss: 0.0730
+Epoch 10/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.7289 - speech_LPS_loss: 0.6598 - dynamic_noise_LPS_loss: 0.5977 - LPS_IRM_loss: 0.1077 - speech_MFCC_loss: 3.7268 - dynamic_noise_MFCC_loss: 2.5641 - MFCC_IRM_loss: 0.0729
+16680/16680 [==============================] - 0s 16us/step
+Iteration: 90  loss:  [11.013842135825032, 0.9764702549941248, 0.7308675180236213, 0.15149650943936777, 4.8324352056288316, 4.1653845327363594, 0.15718815250219487]
+Epoch 1/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.7232 - speech_LPS_loss: 0.6593 - dynamic_noise_LPS_loss: 0.5972 - LPS_IRM_loss: 0.1077 - speech_MFCC_loss: 3.7236 - dynamic_noise_MFCC_loss: 2.5627 - MFCC_IRM_loss: 0.0728
+Epoch 2/10
+975150/975150 [==============================] - 48s 50us/step - loss: 7.7209 - speech_LPS_loss: 0.6591 - dynamic_noise_LPS_loss: 0.5976 - LPS_IRM_loss: 0.1077 - speech_MFCC_loss: 3.7222 - dynamic_noise_MFCC_loss: 2.5614 - MFCC_IRM_loss: 0.0728
+Epoch 3/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.7157 - speech_LPS_loss: 0.6588 - dynamic_noise_LPS_loss: 0.5969 - LPS_IRM_loss: 0.1076 - speech_MFCC_loss: 3.7186 - dynamic_noise_MFCC_loss: 2.5610 - MFCC_IRM_loss: 0.0728
+Epoch 4/10
+975150/975150 [==============================] - 47s 49us/step - loss: 7.7109 - speech_LPS_loss: 0.6585 - dynamic_noise_LPS_loss: 0.5966 - LPS_IRM_loss: 0.1076 - speech_MFCC_loss: 3.7160 - dynamic_noise_MFCC_loss: 2.5596 - MFCC_IRM_loss: 0.0727
+Epoch 5/10
+975150/975150 [==============================] - 48s 49us/step - loss: 7.7072 - speech_LPS_loss: 0.6581 - dynamic_noise_LPS_loss: 0.5967 - LPS_IRM_loss: 0.1076 - speech_MFCC_loss: 3.7134 - dynamic_noise_MFCC_loss: 2.5588 - MFCC_IRM_loss: 0.0727
+Epoch 6/10
+975150/975150 [==============================] - 49s 50us/step - loss: 7.7032 - speech_LPS_loss: 0.6577 - dynamic_noise_LPS_loss: 0.5963 - LPS_IRM_loss: 0.1075 - speech_MFCC_loss: 3.7119 - dynamic_noise_MFCC_loss: 2.5571 - MFCC_IRM_loss: 0.0726
+Epoch 7/10
+975150/975150 [==============================] - 51s 52us/step - loss: 7.6991 - speech_LPS_loss: 0.6575 - dynamic_noise_LPS_loss: 0.5961 - LPS_IRM_loss: 0.1075 - speech_MFCC_loss: 3.7087 - dynamic_noise_MFCC_loss: 2.5567 - MFCC_IRM_loss: 0.0726
+Epoch 8/10
+975150/975150 [==============================] - 51s 52us/step - loss: 7.6956 - speech_LPS_loss: 0.6574 - dynamic_noise_LPS_loss: 0.5958 - LPS_IRM_loss: 0.1075 - speech_MFCC_loss: 3.7066 - dynamic_noise_MFCC_loss: 2.5559 - MFCC_IRM_loss: 0.0725
+Epoch 9/10
+975150/975150 [==============================] - 51s 52us/step - loss: 7.6907 - speech_LPS_loss: 0.6569 - dynamic_noise_LPS_loss: 0.5954 - LPS_IRM_loss: 0.1074 - speech_MFCC_loss: 3.7042 - dynamic_noise_MFCC_loss: 2.5542 - MFCC_IRM_loss: 0.0725
+Epoch 10/10
+975150/975150 [==============================] - 51s 53us/step - loss: 7.6875 - speech_LPS_loss: 0.6565 - dynamic_noise_LPS_loss: 0.5955 - LPS_IRM_loss: 0.1074 - speech_MFCC_loss: 3.7018 - dynamic_noise_MFCC_loss: 2.5539 - MFCC_IRM_loss: 0.0725
+16680/16680 [==============================] - 0s 16us/step
+Iteration: 100  loss:  [10.97812772654801, 0.9386576171115719, 0.7482000364388207, 0.14979857683038825, 4.815459882841408, 4.173118967746945, 0.1528926017687475]
+Training time: 5070.452919483185 s
+mixed_LPS  :  (975150, 8, 257)
+mixed_MFCC  :  (975150, 8, 41)
+
+
+mixed_LPS  :  (975150, 257)
+mixed_MFCC  :  (975150, 41)
+speech_LPS  :  (975150, 257)
+dynamic_noise_LPS  :  (975150, 257)
+LPS_IRM  :  (975150, 257)
+speech_MFCC  :  (975150, 41)
+dynamic_noise_MFCC  :  (975150, 41)
+MFCC_IRM  :  (975150, 40)
+
+
+mixed_LPS  :  (16680, 8, 257)
+mixed_MFCC  :  (16680, 8, 41)
+
+
+mixed_LPS  :  (16680, 257)
+mixed_MFCC  :  (16680, 41)
+speech_LPS  :  (16680, 257)
+dynamic_noise_LPS  :  (16680, 257)
+LPS_IRM  :  (16680, 257)
+speech_MFCC  :  (16680, 41)
+dynamic_noise_MFCC  :  (16680, 41)
+MFCC_IRM  :  (16680, 40)
+
+
+(975150, 257)
+(975150, 257)
+(975150, 257)
+(975150, 257)
+(975150, 41)
+(975150, 41)
+(975150, 41)
+(975150, 40)
+
+
+(16680, 257)
+(16680, 257)
+(16680, 257)
+(16680, 257)
+(16680, 41)
+(16680, 41)
+(16680, 41)
+(16680, 40)
+
+
+(975150, 257)
+(975150, 257)
+(975150, 41)
+(975150, 40)
+
+
+(16680, 257)
+(16680, 257)
+(16680, 41)
+(16680, 40)
+
+
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+mixed_LPS (InputLayer)          (None, 257)          0                                            
+__________________________________________________________________________________________________
+speech_LPS (InputLayer)         (None, 257)          0                                            
+__________________________________________________________________________________________________
+dynamic_noise_LPS (InputLayer)  (None, 257)          0                                            
+__________________________________________________________________________________________________
+LPS_IRM (InputLayer)            (None, 257)          0                                            
+__________________________________________________________________________________________________
+mixed_MFCC (InputLayer)         (None, 41)           0                                            
+__________________________________________________________________________________________________
+speech_MFCC (InputLayer)        (None, 41)           0                                            
+__________________________________________________________________________________________________
+dynamic_noise_MFCC (InputLayer) (None, 41)           0                                            
+__________________________________________________________________________________________________
+MFCC_IRM (InputLayer)           (None, 40)           0                                            
+__________________________________________________________________________________________________
+concatenate_2 (Concatenate)     (None, 1191)         0           mixed_LPS[0][0]                  
+                                                                 speech_LPS[0][0]                 
+                                                                 dynamic_noise_LPS[0][0]          
+                                                                 LPS_IRM[0][0]                    
+                                                                 mixed_MFCC[0][0]                 
+                                                                 speech_MFCC[0][0]                
+                                                                 dynamic_noise_MFCC[0][0]         
+                                                                 MFCC_IRM[0][0]                   
+__________________________________________________________________________________________________
+dense_3 (Dense)                 (None, 2048)         2441216     concatenate_2[0][0]              
+__________________________________________________________________________________________________
+dropout_3 (Dropout)             (None, 2048)         0           dense_3[0][0]                    
+__________________________________________________________________________________________________
+dense_4 (Dense)                 (None, 2048)         4196352     dropout_3[0][0]                  
+__________________________________________________________________________________________________
+dropout_4 (Dropout)             (None, 2048)         0           dense_4[0][0]                    
+__________________________________________________________________________________________________
+main_speech_LPS (Dense)         (None, 257)          526593      dropout_4[0][0]                  
+__________________________________________________________________________________________________
+main_LPS_IRM (Dense)            (None, 257)          526593      dropout_4[0][0]                  
+__________________________________________________________________________________________________
+main_speech_MFCC (Dense)        (None, 41)           84009       dropout_4[0][0]                  
+__________________________________________________________________________________________________
+main_MFCC_IRM (Dense)           (None, 40)           81960       dropout_4[0][0]                  
+==================================================================================================
+Total params: 7,856,723
+Trainable params: 7,856,723
+Non-trainable params: 0
+__________________________________________________________________________________________________
+16680/16680 [==============================] - 0s 29us/step
+Iteration: 0  loss:  [15.919488479193452, 6.12909517288208, 0.4301975294554548, 8.912626668989516, 0.44756904347337406]
+Epoch 1/10
+975150/975150 [==============================] - 38s 39us/step - loss: 4.8136 - main_speech_LPS_loss: 0.9058 - main_LPS_IRM_loss: 0.1479 - main_speech_MFCC_loss: 3.6521 - main_MFCC_IRM_loss: 0.1077
+Epoch 2/10
+975150/975150 [==============================] - 38s 39us/step - loss: 4.2259 - main_speech_LPS_loss: 0.6761 - main_LPS_IRM_loss: 0.1204 - main_speech_MFCC_loss: 3.3439 - main_MFCC_IRM_loss: 0.0856
+Epoch 3/10
+975150/975150 [==============================] - 38s 39us/step - loss: 4.1264 - main_speech_LPS_loss: 0.6544 - main_LPS_IRM_loss: 0.1162 - main_speech_MFCC_loss: 3.2744 - main_MFCC_IRM_loss: 0.0813
+Epoch 4/10
+975150/975150 [==============================] - 38s 39us/step - loss: 4.0693 - main_speech_LPS_loss: 0.6454 - main_LPS_IRM_loss: 0.1147 - main_speech_MFCC_loss: 3.2297 - main_MFCC_IRM_loss: 0.0795
+Epoch 5/10
+975150/975150 [==============================] - 38s 39us/step - loss: 4.0282 - main_speech_LPS_loss: 0.6399 - main_LPS_IRM_loss: 0.1137 - main_speech_MFCC_loss: 3.1962 - main_MFCC_IRM_loss: 0.0783
+Epoch 6/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.9954 - main_speech_LPS_loss: 0.6352 - main_LPS_IRM_loss: 0.1130 - main_speech_MFCC_loss: 3.1698 - main_MFCC_IRM_loss: 0.0774
+Epoch 7/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.9678 - main_speech_LPS_loss: 0.6321 - main_LPS_IRM_loss: 0.1124 - main_speech_MFCC_loss: 3.1466 - main_MFCC_IRM_loss: 0.0767
+Epoch 8/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.9436 - main_speech_LPS_loss: 0.6286 - main_LPS_IRM_loss: 0.1119 - main_speech_MFCC_loss: 3.1271 - main_MFCC_IRM_loss: 0.0760
+Epoch 9/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.9242 - main_speech_LPS_loss: 0.6264 - main_LPS_IRM_loss: 0.1115 - main_speech_MFCC_loss: 3.1108 - main_MFCC_IRM_loss: 0.0755
+Epoch 10/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.9055 - main_speech_LPS_loss: 0.6240 - main_LPS_IRM_loss: 0.1112 - main_speech_MFCC_loss: 3.0953 - main_MFCC_IRM_loss: 0.0751
+16680/16680 [==============================] - 0s 12us/step
+Iteration: 10  loss:  [6.0384924168209375, 0.9525622007658155, 0.15410267127503594, 4.771424885962507, 0.16040267967205826]
+Epoch 1/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.8887 - main_speech_LPS_loss: 0.6219 - main_LPS_IRM_loss: 0.1108 - main_speech_MFCC_loss: 3.0814 - main_MFCC_IRM_loss: 0.0746
+Epoch 2/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.8740 - main_speech_LPS_loss: 0.6203 - main_LPS_IRM_loss: 0.1105 - main_speech_MFCC_loss: 3.0689 - main_MFCC_IRM_loss: 0.0742
+Epoch 3/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.8599 - main_speech_LPS_loss: 0.6182 - main_LPS_IRM_loss: 0.1103 - main_speech_MFCC_loss: 3.0574 - main_MFCC_IRM_loss: 0.0739
+Epoch 4/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.8477 - main_speech_LPS_loss: 0.6170 - main_LPS_IRM_loss: 0.1101 - main_speech_MFCC_loss: 3.0470 - main_MFCC_IRM_loss: 0.0736
+Epoch 5/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.8359 - main_speech_LPS_loss: 0.6155 - main_LPS_IRM_loss: 0.1099 - main_speech_MFCC_loss: 3.0372 - main_MFCC_IRM_loss: 0.0733
+Epoch 6/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.8246 - main_speech_LPS_loss: 0.6138 - main_LPS_IRM_loss: 0.1098 - main_speech_MFCC_loss: 3.0279 - main_MFCC_IRM_loss: 0.0731
+Epoch 7/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.8150 - main_speech_LPS_loss: 0.6125 - main_LPS_IRM_loss: 0.1096 - main_speech_MFCC_loss: 3.0201 - main_MFCC_IRM_loss: 0.0729
+Epoch 8/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.8055 - main_speech_LPS_loss: 0.6110 - main_LPS_IRM_loss: 0.1095 - main_speech_MFCC_loss: 3.0123 - main_MFCC_IRM_loss: 0.0727
+Epoch 9/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.7966 - main_speech_LPS_loss: 0.6100 - main_LPS_IRM_loss: 0.1094 - main_speech_MFCC_loss: 3.0048 - main_MFCC_IRM_loss: 0.0725
+Epoch 10/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.7882 - main_speech_LPS_loss: 0.6087 - main_LPS_IRM_loss: 0.1093 - main_speech_MFCC_loss: 2.9978 - main_MFCC_IRM_loss: 0.0723
+16680/16680 [==============================] - 0s 11us/step
+Iteration: 20  loss:  [6.06313998041679, 1.0699001436325, 0.15376523417248714, 4.681510406832615, 0.15796421532579463]
+Epoch 1/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.7799 - main_speech_LPS_loss: 0.6074 - main_LPS_IRM_loss: 0.1091 - main_speech_MFCC_loss: 2.9912 - main_MFCC_IRM_loss: 0.0722
+Epoch 2/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.7731 - main_speech_LPS_loss: 0.6066 - main_LPS_IRM_loss: 0.1090 - main_speech_MFCC_loss: 2.9855 - main_MFCC_IRM_loss: 0.0720
+Epoch 3/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.7650 - main_speech_LPS_loss: 0.6056 - main_LPS_IRM_loss: 0.1089 - main_speech_MFCC_loss: 2.9787 - main_MFCC_IRM_loss: 0.0718
+Epoch 4/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.7581 - main_speech_LPS_loss: 0.6042 - main_LPS_IRM_loss: 0.1089 - main_speech_MFCC_loss: 2.9733 - main_MFCC_IRM_loss: 0.0717
+Epoch 5/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.7515 - main_speech_LPS_loss: 0.6030 - main_LPS_IRM_loss: 0.1088 - main_speech_MFCC_loss: 2.9681 - main_MFCC_IRM_loss: 0.0716
+Epoch 6/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.7453 - main_speech_LPS_loss: 0.6022 - main_LPS_IRM_loss: 0.1087 - main_speech_MFCC_loss: 2.9629 - main_MFCC_IRM_loss: 0.0715
+Epoch 7/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.7397 - main_speech_LPS_loss: 0.6013 - main_LPS_IRM_loss: 0.1087 - main_speech_MFCC_loss: 2.9584 - main_MFCC_IRM_loss: 0.0714
+Epoch 8/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.7341 - main_speech_LPS_loss: 0.6005 - main_LPS_IRM_loss: 0.1086 - main_speech_MFCC_loss: 2.9538 - main_MFCC_IRM_loss: 0.0713
+Epoch 9/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.7277 - main_speech_LPS_loss: 0.5995 - main_LPS_IRM_loss: 0.1085 - main_speech_MFCC_loss: 2.9486 - main_MFCC_IRM_loss: 0.0712
+Epoch 10/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.7231 - main_speech_LPS_loss: 0.5987 - main_LPS_IRM_loss: 0.1085 - main_speech_MFCC_loss: 2.9448 - main_MFCC_IRM_loss: 0.0711
+16680/16680 [==============================] - 0s 12us/step
+Iteration: 30  loss:  [5.889632039790531, 0.9337700239760127, 0.15014755442845737, 4.650315842068167, 0.1553985922742519]
+Epoch 1/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.7179 - main_speech_LPS_loss: 0.5978 - main_LPS_IRM_loss: 0.1084 - main_speech_MFCC_loss: 2.9407 - main_MFCC_IRM_loss: 0.0710
+Epoch 2/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.7127 - main_speech_LPS_loss: 0.5971 - main_LPS_IRM_loss: 0.1083 - main_speech_MFCC_loss: 2.9363 - main_MFCC_IRM_loss: 0.0709
+Epoch 3/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.7080 - main_speech_LPS_loss: 0.5960 - main_LPS_IRM_loss: 0.1083 - main_speech_MFCC_loss: 2.9327 - main_MFCC_IRM_loss: 0.0709
+Epoch 4/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.7037 - main_speech_LPS_loss: 0.5954 - main_LPS_IRM_loss: 0.1082 - main_speech_MFCC_loss: 2.9292 - main_MFCC_IRM_loss: 0.0708
+Epoch 5/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6989 - main_speech_LPS_loss: 0.5944 - main_LPS_IRM_loss: 0.1082 - main_speech_MFCC_loss: 2.9255 - main_MFCC_IRM_loss: 0.0707
+Epoch 6/10
+975150/975150 [==============================] - 39s 40us/step - loss: 3.6939 - main_speech_LPS_loss: 0.5939 - main_LPS_IRM_loss: 0.1082 - main_speech_MFCC_loss: 2.9211 - main_MFCC_IRM_loss: 0.0707
+Epoch 7/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6897 - main_speech_LPS_loss: 0.5931 - main_LPS_IRM_loss: 0.1081 - main_speech_MFCC_loss: 2.9178 - main_MFCC_IRM_loss: 0.0706
+Epoch 8/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6859 - main_speech_LPS_loss: 0.5924 - main_LPS_IRM_loss: 0.1081 - main_speech_MFCC_loss: 2.9148 - main_MFCC_IRM_loss: 0.0706
+Epoch 9/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6819 - main_speech_LPS_loss: 0.5919 - main_LPS_IRM_loss: 0.1080 - main_speech_MFCC_loss: 2.9115 - main_MFCC_IRM_loss: 0.0705
+Epoch 10/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6779 - main_speech_LPS_loss: 0.5912 - main_LPS_IRM_loss: 0.1080 - main_speech_MFCC_loss: 2.9081 - main_MFCC_IRM_loss: 0.0705
+16680/16680 [==============================] - 0s 12us/step
+Iteration: 40  loss:  [5.871523986788962, 0.9200058644338192, 0.1497840375136986, 4.6493925143774755, 0.15234157986921087]
+Epoch 1/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6743 - main_speech_LPS_loss: 0.5907 - main_LPS_IRM_loss: 0.1079 - main_speech_MFCC_loss: 2.9052 - main_MFCC_IRM_loss: 0.0704
+Epoch 2/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6701 - main_speech_LPS_loss: 0.5899 - main_LPS_IRM_loss: 0.1079 - main_speech_MFCC_loss: 2.9019 - main_MFCC_IRM_loss: 0.0704
+Epoch 3/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6665 - main_speech_LPS_loss: 0.5891 - main_LPS_IRM_loss: 0.1079 - main_speech_MFCC_loss: 2.8992 - main_MFCC_IRM_loss: 0.0704
+Epoch 4/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6639 - main_speech_LPS_loss: 0.5888 - main_LPS_IRM_loss: 0.1078 - main_speech_MFCC_loss: 2.8969 - main_MFCC_IRM_loss: 0.0703
+Epoch 5/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6596 - main_speech_LPS_loss: 0.5880 - main_LPS_IRM_loss: 0.1079 - main_speech_MFCC_loss: 2.8934 - main_MFCC_IRM_loss: 0.0703
+Epoch 6/10
+975150/975150 [==============================] - 39s 40us/step - loss: 3.6570 - main_speech_LPS_loss: 0.5877 - main_LPS_IRM_loss: 0.1078 - main_speech_MFCC_loss: 2.8912 - main_MFCC_IRM_loss: 0.0703
+Epoch 7/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6531 - main_speech_LPS_loss: 0.5870 - main_LPS_IRM_loss: 0.1078 - main_speech_MFCC_loss: 2.8880 - main_MFCC_IRM_loss: 0.0702
+Epoch 8/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6501 - main_speech_LPS_loss: 0.5866 - main_LPS_IRM_loss: 0.1078 - main_speech_MFCC_loss: 2.8855 - main_MFCC_IRM_loss: 0.0702
+Epoch 9/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6466 - main_speech_LPS_loss: 0.5859 - main_LPS_IRM_loss: 0.1077 - main_speech_MFCC_loss: 2.8828 - main_MFCC_IRM_loss: 0.0702
+Epoch 10/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6442 - main_speech_LPS_loss: 0.5857 - main_LPS_IRM_loss: 0.1077 - main_speech_MFCC_loss: 2.8807 - main_MFCC_IRM_loss: 0.0701
+16680/16680 [==============================] - 0s 13us/step
+Iteration: 50  loss:  [5.849687340276704, 0.940330141768467, 0.15002005397558785, 4.607062321143756, 0.15227483589586308]
+Epoch 1/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6408 - main_speech_LPS_loss: 0.5851 - main_LPS_IRM_loss: 0.1077 - main_speech_MFCC_loss: 2.8779 - main_MFCC_IRM_loss: 0.0701
+Epoch 2/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6383 - main_speech_LPS_loss: 0.5846 - main_LPS_IRM_loss: 0.1077 - main_speech_MFCC_loss: 2.8760 - main_MFCC_IRM_loss: 0.0701
+Epoch 3/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6355 - main_speech_LPS_loss: 0.5840 - main_LPS_IRM_loss: 0.1076 - main_speech_MFCC_loss: 2.8738 - main_MFCC_IRM_loss: 0.0701
+Epoch 4/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6322 - main_speech_LPS_loss: 0.5835 - main_LPS_IRM_loss: 0.1076 - main_speech_MFCC_loss: 2.8710 - main_MFCC_IRM_loss: 0.0700
+Epoch 5/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6299 - main_speech_LPS_loss: 0.5831 - main_LPS_IRM_loss: 0.1076 - main_speech_MFCC_loss: 2.8692 - main_MFCC_IRM_loss: 0.0700
+Epoch 6/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6269 - main_speech_LPS_loss: 0.5828 - main_LPS_IRM_loss: 0.1076 - main_speech_MFCC_loss: 2.8665 - main_MFCC_IRM_loss: 0.0700
+Epoch 7/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6246 - main_speech_LPS_loss: 0.5822 - main_LPS_IRM_loss: 0.1076 - main_speech_MFCC_loss: 2.8649 - main_MFCC_IRM_loss: 0.0699
+Epoch 8/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6221 - main_speech_LPS_loss: 0.5818 - main_LPS_IRM_loss: 0.1076 - main_speech_MFCC_loss: 2.8627 - main_MFCC_IRM_loss: 0.0700
+Epoch 9/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6193 - main_speech_LPS_loss: 0.5814 - main_LPS_IRM_loss: 0.1075 - main_speech_MFCC_loss: 2.8605 - main_MFCC_IRM_loss: 0.0699
+Epoch 10/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6170 - main_speech_LPS_loss: 0.5809 - main_LPS_IRM_loss: 0.1075 - main_speech_MFCC_loss: 2.8586 - main_MFCC_IRM_loss: 0.0699
+16680/16680 [==============================] - 0s 12us/step
+Iteration: 60  loss:  [5.894172074297349, 0.9600556783538928, 0.15175155864345083, 4.629909406291495, 0.15245544634562888]
+Epoch 1/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6144 - main_speech_LPS_loss: 0.5806 - main_LPS_IRM_loss: 0.1075 - main_speech_MFCC_loss: 2.8564 - main_MFCC_IRM_loss: 0.0699
+Epoch 2/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6119 - main_speech_LPS_loss: 0.5803 - main_LPS_IRM_loss: 0.1075 - main_speech_MFCC_loss: 2.8542 - main_MFCC_IRM_loss: 0.0699
+Epoch 3/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6100 - main_speech_LPS_loss: 0.5799 - main_LPS_IRM_loss: 0.1075 - main_speech_MFCC_loss: 2.8527 - main_MFCC_IRM_loss: 0.0699
+Epoch 4/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6076 - main_speech_LPS_loss: 0.5795 - main_LPS_IRM_loss: 0.1074 - main_speech_MFCC_loss: 2.8508 - main_MFCC_IRM_loss: 0.0699
+Epoch 5/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6048 - main_speech_LPS_loss: 0.5790 - main_LPS_IRM_loss: 0.1074 - main_speech_MFCC_loss: 2.8485 - main_MFCC_IRM_loss: 0.0698
+Epoch 6/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6030 - main_speech_LPS_loss: 0.5789 - main_LPS_IRM_loss: 0.1074 - main_speech_MFCC_loss: 2.8469 - main_MFCC_IRM_loss: 0.0698
+Epoch 7/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.6007 - main_speech_LPS_loss: 0.5784 - main_LPS_IRM_loss: 0.1074 - main_speech_MFCC_loss: 2.8451 - main_MFCC_IRM_loss: 0.0698
+Epoch 8/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.5986 - main_speech_LPS_loss: 0.5781 - main_LPS_IRM_loss: 0.1074 - main_speech_MFCC_loss: 2.8433 - main_MFCC_IRM_loss: 0.0698
+Epoch 9/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.5965 - main_speech_LPS_loss: 0.5777 - main_LPS_IRM_loss: 0.1074 - main_speech_MFCC_loss: 2.8415 - main_MFCC_IRM_loss: 0.0698
+Epoch 10/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.5944 - main_speech_LPS_loss: 0.5773 - main_LPS_IRM_loss: 0.1073 - main_speech_MFCC_loss: 2.8400 - main_MFCC_IRM_loss: 0.0697
+16680/16680 [==============================] - 0s 13us/step
+Iteration: 70  loss:  [5.82035973180684, 0.9336558848547992, 0.14789780451239443, 4.587954606598229, 0.15085144278814466]
+Epoch 1/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.5926 - main_speech_LPS_loss: 0.5771 - main_LPS_IRM_loss: 0.1074 - main_speech_MFCC_loss: 2.8384 - main_MFCC_IRM_loss: 0.0697
+Epoch 2/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.5903 - main_speech_LPS_loss: 0.5767 - main_LPS_IRM_loss: 0.1074 - main_speech_MFCC_loss: 2.8365 - main_MFCC_IRM_loss: 0.0697
+Epoch 3/10
+975150/975150 [==============================] - 39s 40us/step - loss: 3.5887 - main_speech_LPS_loss: 0.5765 - main_LPS_IRM_loss: 0.1074 - main_speech_MFCC_loss: 2.8351 - main_MFCC_IRM_loss: 0.0698
+Epoch 4/10
+975150/975150 [==============================] - 39s 40us/step - loss: 3.5868 - main_speech_LPS_loss: 0.5760 - main_LPS_IRM_loss: 0.1073 - main_speech_MFCC_loss: 2.8337 - main_MFCC_IRM_loss: 0.0698
+Epoch 5/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.5845 - main_speech_LPS_loss: 0.5758 - main_LPS_IRM_loss: 0.1073 - main_speech_MFCC_loss: 2.8316 - main_MFCC_IRM_loss: 0.0697
+Epoch 6/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.5830 - main_speech_LPS_loss: 0.5756 - main_LPS_IRM_loss: 0.1073 - main_speech_MFCC_loss: 2.8304 - main_MFCC_IRM_loss: 0.0697
+Epoch 7/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.5803 - main_speech_LPS_loss: 0.5752 - main_LPS_IRM_loss: 0.1073 - main_speech_MFCC_loss: 2.8281 - main_MFCC_IRM_loss: 0.0697
+Epoch 8/10
+975150/975150 [==============================] - 38s 39us/step - loss: 3.5791 - main_speech_LPS_loss: 0.5749 - main_LPS_IRM_loss: 0.1073 - main_speech_MFCC_loss: 2.8271 - main_MFCC_IRM_loss: 0.0698
+Epoch 9/10
+975150/975150 [==============================] - 37s 38us/step - loss: 3.5774 - main_speech_LPS_loss: 0.5747 - main_LPS_IRM_loss: 0.1073 - main_speech_MFCC_loss: 2.8257 - main_MFCC_IRM_loss: 0.0697
+Epoch 10/10
+975150/975150 [==============================] - 37s 38us/step - loss: 3.5758 - main_speech_LPS_loss: 0.5744 - main_LPS_IRM_loss: 0.1073 - main_speech_MFCC_loss: 2.8244 - main_MFCC_IRM_loss: 0.0697
+16680/16680 [==============================] - 0s 12us/step
+Iteration: 80  loss:  [5.78657939028111, 0.9094109236193504, 0.14841103681700407, 4.578498552171446, 0.1502588686682909]
+Epoch 1/10
+975150/975150 [==============================] - 37s 38us/step - loss: 3.5737 - main_speech_LPS_loss: 0.5741 - main_LPS_IRM_loss: 0.1072 - main_speech_MFCC_loss: 2.8227 - main_MFCC_IRM_loss: 0.0697
+Epoch 2/10
+975150/975150 [==============================] - 37s 38us/step - loss: 3.5719 - main_speech_LPS_loss: 0.5738 - main_LPS_IRM_loss: 0.1073 - main_speech_MFCC_loss: 2.8211 - main_MFCC_IRM_loss: 0.0697
+Epoch 3/10
+975150/975150 [==============================] - 37s 38us/step - loss: 3.5702 - main_speech_LPS_loss: 0.5736 - main_LPS_IRM_loss: 0.1073 - main_speech_MFCC_loss: 2.8197 - main_MFCC_IRM_loss: 0.0697
+Epoch 4/10
+975150/975150 [==============================] - 35s 36us/step - loss: 3.5686 - main_speech_LPS_loss: 0.5732 - main_LPS_IRM_loss: 0.1073 - main_speech_MFCC_loss: 2.8184 - main_MFCC_IRM_loss: 0.0697
+Epoch 5/10
+975150/975150 [==============================] - 35s 35us/step - loss: 3.5672 - main_speech_LPS_loss: 0.5730 - main_LPS_IRM_loss: 0.1072 - main_speech_MFCC_loss: 2.8173 - main_MFCC_IRM_loss: 0.0697
+Epoch 6/10
+975150/975150 [==============================] - 36s 37us/step - loss: 3.5659 - main_speech_LPS_loss: 0.5729 - main_LPS_IRM_loss: 0.1073 - main_speech_MFCC_loss: 2.8161 - main_MFCC_IRM_loss: 0.0697
+Epoch 7/10
+975150/975150 [==============================] - 35s 36us/step - loss: 3.5639 - main_speech_LPS_loss: 0.5726 - main_LPS_IRM_loss: 0.1072 - main_speech_MFCC_loss: 2.8145 - main_MFCC_IRM_loss: 0.0696
+Epoch 8/10
+975150/975150 [==============================] - 35s 36us/step - loss: 3.5626 - main_speech_LPS_loss: 0.5723 - main_LPS_IRM_loss: 0.1072 - main_speech_MFCC_loss: 2.8134 - main_MFCC_IRM_loss: 0.0696
+Epoch 9/10
+975150/975150 [==============================] - 36s 36us/step - loss: 3.5612 - main_speech_LPS_loss: 0.5720 - main_LPS_IRM_loss: 0.1072 - main_speech_MFCC_loss: 2.8123 - main_MFCC_IRM_loss: 0.0697
+Epoch 10/10
+975150/975150 [==============================] - 35s 36us/step - loss: 3.5595 - main_speech_LPS_loss: 0.5719 - main_LPS_IRM_loss: 0.1072 - main_speech_MFCC_loss: 2.8108 - main_MFCC_IRM_loss: 0.0696
+16680/16680 [==============================] - 0s 11us/step
+Iteration: 90  loss:  [5.810447860736069, 0.9135038922444808, 0.14838444416900332, 4.598419793218159, 0.1501397230999647]
+Epoch 1/10
+975150/975150 [==============================] - 35s 36us/step - loss: 3.5577 - main_speech_LPS_loss: 0.5716 - main_LPS_IRM_loss: 0.1072 - main_speech_MFCC_loss: 2.8092 - main_MFCC_IRM_loss: 0.0696
+Epoch 2/10
+975150/975150 [==============================] - 35s 36us/step - loss: 3.5563 - main_speech_LPS_loss: 0.5713 - main_LPS_IRM_loss: 0.1072 - main_speech_MFCC_loss: 2.8082 - main_MFCC_IRM_loss: 0.0696
+Epoch 3/10
+975150/975150 [==============================] - 36s 37us/step - loss: 3.5550 - main_speech_LPS_loss: 0.5711 - main_LPS_IRM_loss: 0.1072 - main_speech_MFCC_loss: 2.8071 - main_MFCC_IRM_loss: 0.0696
+Epoch 4/10
+975150/975150 [==============================] - 35s 36us/step - loss: 3.5537 - main_speech_LPS_loss: 0.5710 - main_LPS_IRM_loss: 0.1072 - main_speech_MFCC_loss: 2.8059 - main_MFCC_IRM_loss: 0.0696
+Epoch 5/10
+975150/975150 [==============================] - 35s 36us/step - loss: 3.5515 - main_speech_LPS_loss: 0.5707 - main_LPS_IRM_loss: 0.1072 - main_speech_MFCC_loss: 2.8040 - main_MFCC_IRM_loss: 0.0696
+Epoch 6/10
+975150/975150 [==============================] - 35s 36us/step - loss: 3.5511 - main_speech_LPS_loss: 0.5704 - main_LPS_IRM_loss: 0.1072 - main_speech_MFCC_loss: 2.8038 - main_MFCC_IRM_loss: 0.0696
+Epoch 7/10
+975150/975150 [==============================] - 35s 36us/step - loss: 3.5499 - main_speech_LPS_loss: 0.5703 - main_LPS_IRM_loss: 0.1072 - main_speech_MFCC_loss: 2.8028 - main_MFCC_IRM_loss: 0.0696
+Epoch 8/10
+975150/975150 [==============================] - 35s 36us/step - loss: 3.5478 - main_speech_LPS_loss: 0.5700 - main_LPS_IRM_loss: 0.1072 - main_speech_MFCC_loss: 2.8009 - main_MFCC_IRM_loss: 0.0696
+Epoch 9/10
+975150/975150 [==============================] - 35s 36us/step - loss: 3.5461 - main_speech_LPS_loss: 0.5698 - main_LPS_IRM_loss: 0.1071 - main_speech_MFCC_loss: 2.7995 - main_MFCC_IRM_loss: 0.0696
+Epoch 10/10
+975150/975150 [==============================] - 35s 36us/step - loss: 3.5451 - main_speech_LPS_loss: 0.5697 - main_LPS_IRM_loss: 0.1072 - main_speech_MFCC_loss: 2.7986 - main_MFCC_IRM_loss: 0.0696
+16680/16680 [==============================] - 0s 10us/step
+Iteration: 100  loss:  [5.7968977845830025, 0.9193953330568272, 0.15042272455972447, 4.576485262100073, 0.1505944294251984]
+Training time: 3756.747153520584 s
