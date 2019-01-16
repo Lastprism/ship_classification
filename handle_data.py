@@ -145,22 +145,22 @@ def print_shape(data):
 def log_sp(x):
 	return np.log(x + 1e-8)
 
-def x_transpose_2d_to_3d(mixed_x):
+def x_transpose_2d_to_3d(mixed_x, n_leftward_extent, n_rightward_extent):
 	#获取mixed_x的shape
 	(x,y) = mixed_x.shape
 	#对mixed_x的前后进行补全0行
-	n_leftward_extent = max(cfg.n_leftward_extent, 1)
-	tmp_x = np.vstack((np.array([mixed_x[0]] * n_leftward_extent) , mixed_x, np.array([mixed_x[-1]] * cfg.n_rightward_extent)))
+	#n_leftward_extent = max(n_leftward_extent, 1)
+	tmp_x = np.vstack((np.array([mixed_x[0]] * max(n_leftward_extent, 1)) , mixed_x, np.array([mixed_x[-1]] * n_rightward_extent)))
 	#存储结果
 	res = []
 	#从每一帧的前后几帧组合起来 + 静态噪音LPS
 	for iter in range(n_leftward_extent, x + n_leftward_extent):
-		res.append( np.vstack( ( tmp_x[ iter-cfg.n_leftward_extent : iter+cfg.n_rightward_extent ] ) ) )
+		res.append( np.vstack( ( tmp_x[ iter-n_leftward_extent : iter+n_rightward_extent ] ) ) )
 	#返回结果
 	return np.array(res)
 
 
-def process_data(data):
+def process_data(data, n_leftward_extent, n_rightward_extent):
 	res = dict({'LPS':[], 'MFCC':[], 'GFCC':[], 'flag':[]})
 	iter = 0
 	for item in data:
@@ -179,9 +179,9 @@ def process_data(data):
 			flag = np.ones((length,1))
 
 		######################################
-		LPS = x_transpose_2d_to_3d(LPS)
-		MFCC = x_transpose_2d_to_3d(MFCC)
-		GFCC = x_transpose_2d_to_3d(GFCC)
+		LPS = x_transpose_2d_to_3d(LPS, n_leftward_extent, n_rightward_extent)
+		MFCC = x_transpose_2d_to_3d(MFCC, n_leftward_extent, n_rightward_extent)
+		GFCC = x_transpose_2d_to_3d(GFCC, n_leftward_extent, n_rightward_extent)
 		res['LPS'].append(LPS)
 		res['MFCC'].append(MFCC)
 		res['GFCC'].append(GFCC)

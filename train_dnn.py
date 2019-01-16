@@ -8,6 +8,7 @@ import glob
 import prepare as pp
 import config as cfg
 import handle_data as hddt
+import predict as pd
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -23,7 +24,7 @@ def ps(str):
 	if cfg.isOut:
 		print(str)
 
-def train(x_attributes, y_attributes):
+def train(x_attributes, y_attributes, train_input, n_leftward_extent, n_rightward_extent):
 
 	###提取输入数据
 	#x_attributes = ['mixed_LPS', 'speech_LPS', 'dynamic_noise_LPS', 'LPS_IRM']
@@ -46,7 +47,7 @@ def train(x_attributes, y_attributes):
 	###建模
 
 	(_, n_concat, n_freq) = x_train_data[0].shape
-	model = build_mol_model(n_hide)
+	model = build_mol_model(n_concat, n_hide, train_input)
 
 	#(_, n_freq) = x_train_data[0].shape
 	#model = build_moe_model(n_hide)
@@ -70,24 +71,27 @@ def train(x_attributes, y_attributes):
 			if save_cnt % 50 == 0:
 				decay_factor *= decay_rate
 			last_loss = loss * decay_factor
-			save_model(model, (iter+1) * save_times)
+			save_model(model, (iter+1) * save_times, n_concat, x_attributes)
 			ps("save model")
+			#pd.test_result(x_attributes, (iter+1) * save_times, n_leftward_extent, n_rightward_extent)
 
 	ps("Training time: %s s" % timer.end())
 
 	###保存模型
-	save_model(model, epochs)
+	if(not cfg.is_use_last_model):
+		save_model(model, epochs, n_concat, x_attributes)
 
 
-def build_mol_model(n_hide):
+def build_mol_model(n_concat, n_hide, train_input):
 
 	x_input = []
-	for item in cfg.train_input:
+	for item in train_input:
 		x_input.append(Input(shape=item[1], name=item[0]))
-	n_concat = cfg.n_concat
-	n_freq = cfg.n_freq
-
-	x = keras.layers.concatenate(x_input)
+	x = None
+	if(len(train_input) == 1):
+		x = x_input[0]
+	else:
+		x = keras.layers.concatenate(x_input)
 
 	x = Flatten()(x)
 	for i in range(6):
@@ -131,8 +135,9 @@ def load_train_data(train_type, attributes):
 	return train_data
 
 
-def save_model(model, iter, ):
-	model_path = os.path.join(cfg.model_dir, "Model_%d.h5"%(iter))
+def save_model(model, iter, n_concat, x_attributes):
+	feature_name = '_'.join(x_attributes)
+	model_path = os.path.join(cfg.model_dir, "%d"%(n_concat), feature_name, "Model_%d.h5"%(iter))
 	hddt.create_fold(os.path.dirname(model_path))
 	model.save(model_path)
 

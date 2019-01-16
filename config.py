@@ -9,12 +9,11 @@ frame_count = 6
 n_rightward_extent = 2
 n_leftward_extent = 1
 n_forward_hop = 1
-n_concat = n_rightward_extent + n_leftward_extent
 
 
 ###global parameter
 batch_size = 256
-epochs = 1000
+epochs = 50
 echo_times = 1
 save_times = 1
 train_snr = 0
@@ -34,7 +33,7 @@ n_GFCC_IRM = 64
 workspace = os.path.join("..", "Data", "ship_classification", "workspace")
 feature_dir = os.path.join(workspace, "feature")
 packed_feature_dir = os.path.join(workspace, "packed_feature")
-model_dir = os.path.join(workspace, "model", "v1_3")
+model_dir = os.path.join(workspace, "model")
 res_dir = os.path.join(workspace, "result")
 
 
@@ -52,6 +51,7 @@ n_concat = n_leftward_extent + n_rightward_extent
 
 
 train_input = [['LPS', (n_concat, n_freq)], ['MFCC',(n_concat, n_MFCC)], ['GFCC',(n_concat, n_GFCC)]]
+const_train_input = [['LPS'], ['MFCC'], ['GFCC']]
 train_output = [['flag', 'sigmoid', 1]]
 
 
@@ -59,7 +59,10 @@ test_iter = 22
 
 ans = dict({'fishing':1, 'merchant':0})
 
-verbose = 1
+verbose = 2
 
 decay_factor = 1.0
 decay_rate = 0.95
+
+
+is_use_last_model = True
