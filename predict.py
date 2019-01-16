@@ -86,12 +86,12 @@ def predict(x_attributes, ship_type, iter, n_leftward_extent, n_rightward_extent
 		else:
 			res[f_name] = 0
 		#print(ship_type, zero_cnt, one_cnt)
-	res_path = os.path.join(cfg.res_dir, "%s.txt"%ship_type)
+	res_path = os.path.join(cfg.res_dir, "%s_%s.txt"%(ship_type,data_type))
 	hddt.create_fold(os.path.dirname(res_path))
 	write_json(res_path, res)
 
 def evalue(x_attributes, ship_type, n_concat, data_type):
-	file_name = os.path.join(cfg.res_dir, "%s.txt"%ship_type)
+	file_name = os.path.join(cfg.res_dir, "%s_%s.txt"%(ship_type,data_type))
 	data = read_json(file_name)
 	true_cnt = 0
 	false_cnt = 0

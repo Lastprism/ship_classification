@@ -24,10 +24,14 @@ def get_feature(n_leftward_extent, n_rightward_extent):
 	#混合提取特征
 	
 	pp.get_feature(cfg.train_mechant_dir, cfg.train_fishing_dir, 'train')
+	pp.get_feature(cfg.test_mechant_dir, cfg.test_fishing_dir, 'test1')
+	pp.get_feature(cfg.test_mechant_dir, cfg.test_fishing_dir, 'test2')
 	pp.get_feature(cfg.test_mechant_dir, cfg.test_fishing_dir, 'test')
 	
 	#处理数据
 	pp.pack_feature("train", n_leftward_extent, n_rightward_extent)
+	pp.pack_feature("test1", n_leftward_extent, n_rightward_extent)
+	pp.pack_feature("test2", n_leftward_extent, n_rightward_extent)
 	pp.pack_feature("test", n_leftward_extent, n_rightward_extent)
 	
 def train(train_input, n_leftward_extent, n_rightward_extent):
@@ -40,7 +44,8 @@ def predict(train_input, iter, n_leftward_extent, n_rightward_extent):
 	#最终预测
 	x_attributes = [ item[0] for item in train_input ]
 	pd.test_result(x_attributes, iter, n_leftward_extent, n_rightward_extent, 'train')
-	pd.test_result(x_attributes, iter, n_leftward_extent, n_rightward_extent, 'test')
+	pd.test_result(x_attributes, iter, n_leftward_extent, n_rightward_extent, 'test1')
+	pd.test_result(x_attributes, iter, n_leftward_extent, n_rightward_extent, 'test2')
 
 
 def get_input(j, n_concat):
